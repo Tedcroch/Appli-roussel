@@ -10,7 +10,7 @@
 
 **Erreur :** On ne comprenait pas tous les lignes de codes données par l'IA.
 
-# **2éme Prompt pour le contenu-memoire**
+# **3éme Prompt pour le contenu-memoire**
 
 **Prompt :**  Lis "contenu-memoire.txt" et convertis le en format json selon le schema dans schema-memoire.json puis explique moi chaque ligne.
 
