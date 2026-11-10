@@ -1,55 +1,41 @@
-<!DOCTYPE html>
-<html lang="">
-<!-- Mettre le code langue du site dans l'attribut lang -->
-
+<!doctype html>
+<html lang="fr">
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title><!-- Mettre le titre de la page --></title>
-	<meta name="description" content="" />
-	<!-- Mettre la description du contenu de la page dans l'attribut content -->
-
-	<!-- Mettre ci-dessous les informations pour Open Graph (concerne notamment Facebook) - Voir https://ogp.me/-->
-	<meta property="og:title" content="" />
-	<meta property="og:type" content="" />
-	<meta property="og:url" content="" />
-	<meta property="og:image" content="" />
-
-	<!-- Le minimum pour gérer les favicon : https://dev.to/masakudamatsu/favicon-nightmare-how-to-maintain-sanity-3al7 
-    Icônes à générer : 
-    favicon.ico : 32x32
-    icon.svg : peu importe la taille, mais privilégier un format carré
-    apple-touch-icon.png : 180x180
-    192.png : 192x192
-    512.png : 512x512
-
-	Vous pouvez aussi utiliser un générateur : https://realfavicongenerator.net/
-    -->
-	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-	<link rel="shortcut icon" href="/favicon.ico" />
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-	<link rel="manifest" href="/site.webmanifest" />
-	<!-- voir le fichier manifest.webmanifest -->
-
-	<!-- A terme : n'appeler qu'une seule feuille de style minifiée -->
-	<link rel="stylesheet" href="css/reset.css" />
-	<link rel="stylesheet" href="css/style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fleurs Roussel</title>
+  <link rel="stylesheet" href="dist/output.css">
+  <!-- defer : le script s'exécute une fois la page lue -->
+  <script src="js/app.js" defer></script>
 </head>
+<body class="bg-white text-roussel-texte">
 
-<body>
-	<!-- Burger menu responsive ressource : https://polypane.app/blog/the-perfect-responsive-menu/ avec les règles d'accessibilité : https://www.accede-web.com/notices/interface-riche/menu-hamburger/ 
-	<nav role="navigation" aria-label="Menu principal">
-		<button aria-expanded="true" aria-controls="menu-principal">
-			<svg aria-hidden="true" focusable="false">[…]</svg>
-			Menu
-		</button>
-		[…]
-		<ul id="menu-principal" class="visible">
-			[Menu de navigation principal]
-		</ul>
-	</nav>  -->
+  <!-- En-tête commun du site -->
+  <header class="bg-roussel-vert text-white">
+    <div class="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-4 md:flex-row md:items-center md:justify-between">
+      <a href="index.html" class="text-xl font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Fleurs Roussel</a>
+      <nav aria-label="Navigation principale">
+        <ul class="flex flex-wrap gap-x-5 gap-y-2">
+          <li><a href="bouquets.html" class="hover:underline focus-visible:outline-2 focus-visible:outline-white">Bouquets</a></li>
+          <li><a href="abonnement.html" class="hover:underline focus-visible:outline-2 focus-visible:outline-white">Abonnement</a></li>
+          <li><a href="contact.html" class="hover:underline focus-visible:outline-2 focus-visible:outline-white">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu" class="mx-auto max-w-5xl px-4 py-8">
+
+    <!-- L'application vient ici. -->
+
+  </main>
+
+  <!-- Pied de page commun du site -->
+  <footer class="mt-12 bg-roussel-vert-clair">
+    <div class="mx-auto max-w-5xl px-4 py-6 text-roussel-gris">
+      <p><strong class="text-roussel-vert">Fleurs Roussel</strong>, 14 rue Colbert, 37000 Tours</p>
+    </div>
+  </footer>
 
 </body>
-<script src="js/nav.js"></script>
 </html>
