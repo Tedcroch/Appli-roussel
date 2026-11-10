@@ -8,4 +8,4 @@ Lis "contenu-memoire.txt" et convertis en format json selon le schema dans schem
 
 **3éme Prompt pour le contenu-memoire**
 
-Lis "contenu-memoire.txt" et convertis le en format json selon le schema dans schema-memoire.json puis explique moi chaque ligne.
+Lis "contenu-memoire.txt" et convertis le en format json selon le schema dans schema-memoire.json puis explique moi chaque ligne avec les données de sujet-memoire.pdf.
