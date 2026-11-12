@@ -34,12 +34,58 @@ function creerCarte(fleur, position) {
   const element = document.createElement('li');
   const bouton = document.createElement('button');
   bouton.type = 'button';
-  bouton.className = 'aspect-square w-full min-h-11 rounded-lg bg-roussel-vert text-2xl font-bold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roussel-rose';
+  bouton.className = 'flex aspect-square w-full min-h-11 flex-col items-center justify-center gap-1 rounded-lg bg-roussel-vert p-1 text-2xl font-bold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roussel-rose';
   bouton.dataset.fleur = fleur.id;
   bouton.setAttribute('aria-label', 'Carte ' + position + ', face cachée');
   bouton.textContent = '?';
+  // Un bouton réagit au clic, à Entrée et à Espace avec le même événement.
+  bouton.addEventListener('click', function () {
+    retournerCarte(bouton, fleur, position);
+  });
   element.appendChild(bouton);
   return element;
+}
+
+// Crée l'image SVG de la fleur (alt vide : le nom est écrit juste en dessous).
+function creerImageFleur(fleur) {
+  const image = document.createElement('img');
+  image.src = 'img/fleurs/' + fleur.id + '.svg';
+  image.alt = '';
+  image.className = 'h-auto w-3/4';
+  image.addEventListener('error', function () {
+    afficherImageManquante(image);
+  });
+  return image;
+}
+
+// Remplace une image introuvable par le texte [À COMPLÉTER].
+function afficherImageManquante(image) {
+  const remplacement = document.createElement('span');
+  remplacement.textContent = '[À COMPLÉTER]';
+  image.replaceWith(remplacement);
+}
+
+// Crée le nom de la fleur affiché sous l'image.
+function creerNomFleur(fleur) {
+  const nom = document.createElement('span');
+  nom.className = 'text-xs font-semibold break-words';
+  nom.textContent = fleur.nom || '[À COMPLÉTER]';
+  return nom;
+}
+
+// Retourne une carte cachée : affiche son image et son nom, puis l'annonce.
+function retournerCarte(bouton, fleur, position) {
+  if (bouton.dataset.etat === 'visible') {
+    return;
+  }
+  const nom = fleur.nom || '[À COMPLÉTER]';
+  bouton.dataset.etat = 'visible';
+  bouton.classList.replace('bg-roussel-vert', 'bg-roussel-vert-clair');
+  bouton.classList.replace('text-white', 'text-roussel-texte');
+  bouton.classList.replace('text-2xl', 'text-xs');
+  bouton.replaceChildren(creerImageFleur(fleur), creerNomFleur(fleur));
+  bouton.setAttribute('aria-label', 'Carte ' + position + ', ' + nom);
+  afficherMessage('Carte ' + position + ' : ' + nom);
 }
 
 // Vide la grille puis y place les cartes dans l'ordre reçu.

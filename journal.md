@@ -21,3 +21,11 @@
 **Prompt :** Lis "sujet-memoire.pdf" et convertis la partie cas de tests en format json selon le schema dans schema-memoire.json puis explique moi chaque ligne en écrasant memoire.json.
 
 **Erreur :** Aucune.
+
+**5éme Prompt pour la première fonctionnalité**
+
+**Erreur :** Aucune.
+
+**6éme Prompt pour la deuxième fonctionnalité**
+
+**Erreur :** Aucune.
