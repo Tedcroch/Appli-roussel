@@ -38,6 +38,10 @@
 
 **Erreur :** Aucune.
 
-**8éme Prompt pour la quatrième fonctionnalité**
+**8éme Prompt pour la cinquième fonctionnalité**
+
+**Erreur :** Aucune.
+
+**9éme Prompt pour la sixième fonctionnalité**
 
 **Erreur :** Aucune.

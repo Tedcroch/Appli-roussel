@@ -20,6 +20,9 @@ let nombreDeCoups = 0;
 // Minuterie en cours qui recache deux cartes (null s'il n'y en a pas).
 let minuterie = null;
 
+// Nombre de paires déjà trouvées dans la partie.
+let pairesTrouvees = 0;
+
 // Lit la liste des fleurs dans data/donnees.json.
 async function chargerFleurs() {
   const reponse = await fetch('data/donnees.json');
@@ -142,6 +145,25 @@ function validerPaire(premiere, seconde) {
   cartesRetournees = [];
   afficherMessage('Paire trouvée : ' + (premiere.fleur.nom || '[À COMPLÉTER]'));
   afficherAnecdote(premiere.fleur);
+  pairesTrouvees = pairesTrouvees + 1;
+  if (pairesTrouvees === NOMBRE_DE_PAIRES) {
+    afficherVictoire();
+  }
+}
+
+// Affiche le message de fin avec le nombre de coups et le bouton Rejouer.
+function afficherVictoire() {
+  const motCoup = nombreDeCoups > 1 ? ' coups' : ' coup';
+  const boutonRejouer = document.getElementById('rejouer');
+  document.getElementById('message-victoire').textContent = 'Bravo ! Vous avez trouvé les ' + NOMBRE_DE_PAIRES + ' paires en ' + nombreDeCoups + motCoup + '.';
+  boutonRejouer.classList.remove('hidden');
+  boutonRejouer.focus();
+}
+
+// Efface le message de fin et masque le bouton Rejouer.
+function cacherVictoire() {
+  document.getElementById('message-victoire').textContent = '';
+  document.getElementById('rejouer').classList.add('hidden');
 }
 
 // Écrit le nom et l'anecdote de la fleur dans la zone d'information.
@@ -195,7 +217,9 @@ function reinitialiserPartie() {
   cartesRetournees = [];
   plateauBloque = false;
   nombreDeCoups = 0;
+  pairesTrouvees = 0;
   afficherCoups();
+  cacherVictoire();
   afficherMessage('');
   document.getElementById('anecdote').textContent = '';
 }
@@ -218,5 +242,8 @@ async function demarrerPartie() {
 
 // Le bouton « Nouvelle partie » relance une partie mélangée avec un compteur à 0.
 document.getElementById('nouvelle-partie').addEventListener('click', demarrerPartie);
+
+// Le bouton « Rejouer », visible après la victoire, relance aussi une partie.
+document.getElementById('rejouer').addEventListener('click', demarrerPartie);
 
 demarrerPartie();
