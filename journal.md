@@ -61,3 +61,4 @@
 | 9 | Troisième clic ignoré tant que deux cartes sont en attente | conforme | `peutRetournerCarte` refuse le clic si `plateauBloque` est vrai ou si `cartesRetournees.length < 2` est faux (`app.js:96`). Elle est appelée en `app.js:101` et le plateau est bloqué en `app.js:178`. | Accepté : peutRetournerCarte bloque le 3e clic. | Le troisième clic est déjà bloqué : il n’y a rien à corriger. |
 | 10 | 16 cartes (8 paires), mélangées à chaque nouvelle partie | conforme | Le jeu prend 8 fleurs, les double puis les mélange (`app.js:236`) avec Fisher-Yates (`app.js:41-48`). Ce mélange a lieu à chaque partie (`app.js:244`, `247`, `249`). | Refusé | Les cartes sont déjà mélangées à chaque partie : il n’y a rien à corriger. |
 
+Suite a l'échange avec le groupe de Christophe et Faouzia, en 375px il faut scroll vers le bas pour voir tout le jeu.
