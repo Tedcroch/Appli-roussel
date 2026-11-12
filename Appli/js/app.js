@@ -5,6 +5,15 @@
 // Nombre de paires de fleurs dans une partie.
 const NOMBRE_DE_PAIRES = 8;
 
+// Délai (en millisecondes) avant de recacher deux cartes différentes.
+const DELAI_AVANT_DE_CACHER = 1000;
+
+// Cartes retournées pendant le tour en cours (deux au maximum).
+let cartesRetournees = [];
+
+// Vaut true pendant le délai : on ne peut pas retourner d'autre carte.
+let plateauBloque = false;
+
 // Lit la liste des fleurs dans data/donnees.json.
 async function chargerFleurs() {
   const reponse = await fetch('data/donnees.json');
@@ -75,7 +84,7 @@ function creerNomFleur(fleur) {
 
 // Retourne une carte cachée : affiche son image et son nom, puis l'annonce.
 function retournerCarte(bouton, fleur, position) {
-  if (bouton.dataset.etat === 'visible') {
+  if (plateauBloque || bouton.dataset.etat) {
     return;
   }
   const nom = fleur.nom || '[À COMPLÉTER]';
@@ -86,6 +95,59 @@ function retournerCarte(bouton, fleur, position) {
   bouton.replaceChildren(creerImageFleur(fleur), creerNomFleur(fleur));
   bouton.setAttribute('aria-label', 'Carte ' + position + ', ' + nom);
   afficherMessage('Carte ' + position + ' : ' + nom);
+  cartesRetournees.push({ bouton: bouton, fleur: fleur, position: position });
+  if (cartesRetournees.length === 2) {
+    verifierPaire();
+  }
+}
+
+// Compare les deux cartes retournées et choisit la suite du tour.
+function verifierPaire() {
+  const premiere = cartesRetournees[0];
+  const seconde = cartesRetournees[1];
+  if (premiere.fleur.id === seconde.fleur.id) {
+    validerPaire(premiere, seconde);
+  } else {
+    programmerRetourFaceCachee(premiere, seconde);
+  }
+}
+
+// Garde une paire visible pour toujours et affiche l'anecdote de la fleur.
+function validerPaire(premiere, seconde) {
+  premiere.bouton.dataset.etat = 'trouvee';
+  seconde.bouton.dataset.etat = 'trouvee';
+  cartesRetournees = [];
+  afficherMessage('Paire trouvée : ' + (premiere.fleur.nom || '[À COMPLÉTER]'));
+  afficherAnecdote(premiere.fleur);
+}
+
+// Écrit le nom et l'anecdote de la fleur dans la zone d'information.
+function afficherAnecdote(fleur) {
+  const nom = fleur.nom || '[À COMPLÉTER]';
+  const anecdote = fleur.anecdote || '[À COMPLÉTER]';
+  document.getElementById('anecdote').textContent = nom + ' : ' + anecdote;
+}
+
+// Bloque le plateau puis recache deux cartes différentes après le délai.
+function programmerRetourFaceCachee(premiere, seconde) {
+  plateauBloque = true;
+  afficherMessage('Pas de paire, les cartes vont se recacher.');
+  setTimeout(function () {
+    cacherCarte(premiere.bouton, premiere.position);
+    cacherCarte(seconde.bouton, seconde.position);
+    cartesRetournees = [];
+    plateauBloque = false;
+  }, DELAI_AVANT_DE_CACHER);
+}
+
+// Remet une carte face cachée, comme au début de la partie.
+function cacherCarte(bouton, position) {
+  delete bouton.dataset.etat;
+  bouton.classList.replace('bg-roussel-vert-clair', 'bg-roussel-vert');
+  bouton.classList.replace('text-roussel-texte', 'text-white');
+  bouton.classList.replace('text-xs', 'text-2xl');
+  bouton.textContent = '?';
+  bouton.setAttribute('aria-label', 'Carte ' + position + ', face cachée');
 }
 
 // Vide la grille puis y place les cartes dans l'ordre reçu.
