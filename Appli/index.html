@@ -31,6 +31,12 @@
     <!-- Zone d'état : lue par les lecteurs d'écran à chaque changement -->
     <p id="message" aria-live="polite" class="mt-2 text-roussel-rose"></p>
 
+    <!-- Compteur de coups et bouton pour rejouer -->
+    <div class="mt-4 flex items-center justify-between gap-4">
+      <p aria-live="polite" aria-atomic="true" class="font-semibold text-roussel-vert">Coups : <span id="coups">0</span></p>
+      <button id="nouvelle-partie" type="button" class="rounded-lg bg-roussel-vert px-4 py-3 font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roussel-rose">Nouvelle partie</button>
+    </div>
+
     <!-- Zone d'information : anecdote de la dernière paire trouvée (masquée tant qu'elle est vide) -->
     <p id="anecdote" aria-live="polite" class="mt-4 rounded-lg bg-roussel-vert-clair p-4 text-roussel-texte empty:hidden"></p>
 

@@ -14,6 +14,12 @@ let cartesRetournees = [];
 // Vaut true pendant le délai : on ne peut pas retourner d'autre carte.
 let plateauBloque = false;
 
+// Nombre de coups joués (un coup = deux cartes retournées).
+let nombreDeCoups = 0;
+
+// Minuterie en cours qui recache deux cartes (null s'il n'y en a pas).
+let minuterie = null;
+
 // Lit la liste des fleurs dans data/donnees.json.
 async function chargerFleurs() {
   const reponse = await fetch('data/donnees.json');
@@ -82,9 +88,14 @@ function creerNomFleur(fleur) {
   return nom;
 }
 
+// Indique si une carte peut être retournée (jamais plus de deux cartes en attente).
+function peutRetournerCarte(bouton) {
+  return !plateauBloque && cartesRetournees.length < 2 && !bouton.dataset.etat;
+}
+
 // Retourne une carte cachée : affiche son image et son nom, puis l'annonce.
 function retournerCarte(bouton, fleur, position) {
-  if (plateauBloque || bouton.dataset.etat) {
+  if (!peutRetournerCarte(bouton)) {
     return;
   }
   const nom = fleur.nom || '[À COMPLÉTER]';
@@ -97,8 +108,20 @@ function retournerCarte(bouton, fleur, position) {
   afficherMessage('Carte ' + position + ' : ' + nom);
   cartesRetournees.push({ bouton: bouton, fleur: fleur, position: position });
   if (cartesRetournees.length === 2) {
+    ajouterCoup();
     verifierPaire();
   }
+}
+
+// Compte un coup de plus et met à jour l'affichage.
+function ajouterCoup() {
+  nombreDeCoups = nombreDeCoups + 1;
+  afficherCoups();
+}
+
+// Écrit le nombre de coups dans le compteur.
+function afficherCoups() {
+  document.getElementById('coups').textContent = nombreDeCoups;
 }
 
 // Compare les deux cartes retournées et choisit la suite du tour.
@@ -132,11 +155,12 @@ function afficherAnecdote(fleur) {
 function programmerRetourFaceCachee(premiere, seconde) {
   plateauBloque = true;
   afficherMessage('Pas de paire, les cartes vont se recacher.');
-  setTimeout(function () {
+  minuterie = setTimeout(function () {
     cacherCarte(premiere.bouton, premiere.position);
     cacherCarte(seconde.bouton, seconde.position);
     cartesRetournees = [];
     plateauBloque = false;
+    minuterie = null;
   }, DELAI_AVANT_DE_CACHER);
 }
 
@@ -164,8 +188,21 @@ function afficherMessage(texte) {
   document.getElementById('message').textContent = texte;
 }
 
+// Remet l'état du jeu à zéro : coups, cartes en attente, minuterie et messages.
+function reinitialiserPartie() {
+  clearTimeout(minuterie);
+  minuterie = null;
+  cartesRetournees = [];
+  plateauBloque = false;
+  nombreDeCoups = 0;
+  afficherCoups();
+  afficherMessage('');
+  document.getElementById('anecdote').textContent = '';
+}
+
 // Prépare une nouvelle partie : charge, double, mélange et affiche les cartes.
 async function demarrerPartie() {
+  reinitialiserPartie();
   try {
     const fleurs = await chargerFleurs();
     if (!Array.isArray(fleurs) || fleurs.length < NOMBRE_DE_PAIRES) {
@@ -178,5 +215,8 @@ async function demarrerPartie() {
     afficherMessage('Le jeu n\'a pas pu être chargé. Rechargez la page.');
   }
 }
+
+// Le bouton « Nouvelle partie » relance une partie mélangée avec un compteur à 0.
+document.getElementById('nouvelle-partie').addEventListener('click', demarrerPartie);
 
 demarrerPartie();
