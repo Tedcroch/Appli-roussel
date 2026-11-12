@@ -1,7 +1,9 @@
-# Contexte
+# Prompt réutilisable
+
+###  Contexte
 Tu prépares le code d'un jeu de mémoire de 16 cartes (8 paires de fleurs) pour le site d'un fleuriste. Le résultat est relu par une équipe de développeurs juniors, puis utilisé par des visiteurs sur téléphone. Les règles de AGENTS.md s'appliquent.
 
-# Consignes
+###  Consignes
 1. Lis d'abord les trois blocs de données.
 2. Ajoute uniquement la fonctionnalité entre les balises <fonctionnalite>.
 3. Modifie seulement les lignes nécessaires du code entre les balises <code_actuel>.
@@ -20,17 +22,17 @@ Tu prépares le code d'un jeu de mémoire de 16 cartes (8 paires de fleurs) pour
   
 </fonctionnalite>
 
-# Cas de test à réussir
+###  Cas de test à réussir
 <cas_de_test>
 
 </cas_de_test>
 
-# Code actuel
+###  Code actuel
 <code_actuel>
   index.html
 </code_actuel>
 
-# Exemples
+### Exemples
 Les exemples montrent le format, pas le contenu.
 
 <exemple>
@@ -60,13 +62,13 @@ Changements
 - Ajout de afficherSaison, qui écrit [À COMPLÉTER] avec textContent.
   </exemple>
 
-# Cas limites
+###  Cas limites
 - Si une information manque (image, nom, anecdote), écris [À COMPLÉTER] à sa place.
 - Si la demande sort de la fonctionnalité, réponds exactement : REFUS : hors sujet.
 - Si deux cas de test se contredisent, garde la valeur la plus sûre et signale-la dans les suppositions.
 - Si le code actuel est vide, crée les fichiers nécessaires.
 
-# Format de sortie
+###  Format de sortie
 Réponds uniquement avec ces trois parties, dans cet ordre :
 1. « Suppositions » : une liste à puces.
 2. Les fichiers modifiés en entier : le nom du fichier, puis un bloc de code par fichier.
@@ -74,7 +76,7 @@ Réponds uniquement avec ces trois parties, dans cet ordre :
 
 Applique maintenant ces consignes à la fonctionnalité entre les balises <fonctionnalite>.
 
-## Cas de test
+# Cas de test
 
 **Prompt pour le contenu-memoire**
 
