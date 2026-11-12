@@ -8,17 +8,17 @@
   <!-- defer : le script s'exécute une fois la page lue -->
   <script src="js/app.js" defer></script>
 </head>
-<body class="bg-white text-roussel-texte">
+<body class="text-roussel-texte">
 
   <!-- En-tête commun du site -->
-  <header class="bg-roussel-vert text-white">
+  <header class="bg-roussel-vert text-roussel-vert-clair">
     <div class="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-4 md:flex-row md:items-center md:justify-between">
-      <a href="index.html" class="text-xl font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Fleurs Roussel</a>
+      <a href="index.html" class="text-xl font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roussel-vert-clair">Fleurs Roussel</a>
       <nav aria-label="Navigation principale">
         <ul class="flex flex-wrap gap-x-5 gap-y-2">
-          <li><a href="bouquets.html" class="hover:underline focus-visible:outline-2 focus-visible:outline-white">Bouquets</a></li>
-          <li><a href="abonnement.html" class="hover:underline focus-visible:outline-2 focus-visible:outline-white">Abonnement</a></li>
-          <li><a href="contact.html" class="hover:underline focus-visible:outline-2 focus-visible:outline-white">Contact</a></li>
+          <li><a href="bouquets.html" class="hover:underline focus-visible:outline-2 focus-visible:outline-roussel-vert-clair">Bouquets</a></li>
+          <li><a href="abonnement.html" class="hover:underline focus-visible:outline-2 focus-visible:outline-roussel-vert-clair">Abonnement</a></li>
+          <li><a href="contact.html" class="hover:underline focus-visible:outline-2 focus-visible:outline-roussel-vert-clair">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -34,14 +34,14 @@
     <!-- Compteur de coups et bouton pour rejouer -->
     <div class="mt-4 flex items-center justify-between gap-4">
       <p aria-live="polite" aria-atomic="true" class="font-semibold text-roussel-vert">Coups : <span id="coups">0</span></p>
-      <button id="nouvelle-partie" type="button" class="rounded-lg bg-roussel-vert px-4 py-3 font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roussel-rose">Nouvelle partie</button>
+      <button id="nouvelle-partie" type="button" class="rounded-lg bg-roussel-vert px-4 py-3 font-semibold text-roussel-vert-clair focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roussel-rose">Nouvelle partie</button>
     </div>
 
     <!-- Message de fin : zone toujours présente pour que l'annonce soit lue -->
     <div aria-live="polite" class="mt-4">
       <p id="message-victoire" class="rounded-lg border-2 border-roussel-vert bg-roussel-vert-clair p-4 font-semibold text-roussel-vert empty:hidden"></p>
     </div>
-    <button id="rejouer" type="button" class="mt-3 hidden w-full rounded-lg bg-roussel-rose px-4 py-3 font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roussel-rose md:w-auto">Rejouer</button>
+    <button id="rejouer" type="button" class="mt-3 hidden w-full rounded-lg bg-roussel-rose px-4 py-3 font-semibold text-roussel-vert-clair focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roussel-rose md:w-auto">Rejouer</button>
 
     <!-- Zone d'information : anecdote de la dernière paire trouvée (masquée tant qu'elle est vide) -->
     <p id="anecdote" aria-live="polite" class="mt-4 rounded-lg bg-roussel-vert-clair p-4 text-roussel-texte empty:hidden"></p>
