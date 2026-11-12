@@ -52,7 +52,7 @@ function creerCarte(fleur, position) {
   const element = document.createElement('li');
   const bouton = document.createElement('button');
   bouton.type = 'button';
-  bouton.className = 'flex aspect-square w-full min-h-11 flex-col items-center justify-center gap-1 rounded-lg bg-roussel-vert p-1 text-2xl font-bold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roussel-rose';
+  bouton.className = 'flex aspect-square w-full min-h-11 flex-col items-center justify-center gap-1 rounded-lg bg-roussel-vert p-1 text-2xl font-bold text-roussel-vert-clair focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roussel-rose';
   bouton.dataset.fleur = fleur.id;
   bouton.setAttribute('aria-label', 'Carte ' + position + ', face cachée');
   bouton.textContent = '?';
@@ -104,7 +104,7 @@ function retournerCarte(bouton, fleur, position) {
   const nom = fleur.nom || '[À COMPLÉTER]';
   bouton.dataset.etat = 'visible';
   bouton.classList.replace('bg-roussel-vert', 'bg-roussel-vert-clair');
-  bouton.classList.replace('text-white', 'text-roussel-texte');
+  bouton.classList.replace('text-roussel-vert-clair', 'text-roussel-texte');
   bouton.classList.replace('text-2xl', 'text-xs');
   bouton.replaceChildren(creerImageFleur(fleur), creerNomFleur(fleur));
   bouton.setAttribute('aria-label', 'Carte ' + position + ', ' + nom);
@@ -190,7 +190,7 @@ function programmerRetourFaceCachee(premiere, seconde) {
 function cacherCarte(bouton, position) {
   delete bouton.dataset.etat;
   bouton.classList.replace('bg-roussel-vert-clair', 'bg-roussel-vert');
-  bouton.classList.replace('text-roussel-texte', 'text-white');
+  bouton.classList.replace('text-roussel-texte', 'text-roussel-vert-clair');
   bouton.classList.replace('text-xs', 'text-2xl');
   bouton.textContent = '?';
   bouton.setAttribute('aria-label', 'Carte ' + position + ', face cachée');
